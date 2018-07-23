@@ -7,18 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		025E0BE72105C63000ECC12E /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E0BE52105C63000ECC12E /* SliderView.swift */; };
+		025E0BE82105C63000ECC12E /* SliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025E0BE62105C63000ECC12E /* SliderView.xib */; };
+		027BE0AC2105F79A00AD379A /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 027BE0AB2105F79900AD379A /* DDC.c */; };
 		029C27052104755300DA861F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C27042104755300DA861F /* AppDelegate.swift */; };
 		029C27072104755500DA861F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 029C27062104755500DA861F /* Assets.xcassets */; };
 		029C270A2104755500DA861F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029C27082104755500DA861F /* MainMenu.xib */; };
+		029C272A2105C32F00DA861F /* ExtneralScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C27272105C32F00DA861F /* ExtneralScreen.swift */; };
+		02FB96D62105C83A00669B78 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB96D52105C83A00669B78 /* StatusItemController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		025E0BE52105C63000ECC12E /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		025E0BE62105C63000ECC12E /* SliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderView.xib; sourceTree = "<group>"; };
+		027BE0AB2105F79900AD379A /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
 		029C27012104755300DA861F /* ExtBrightness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExtBrightness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		029C27042104755300DA861F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		029C27062104755500DA861F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		029C27092104755500DA861F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		029C270B2104755500DA861F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		029C270C2104755500DA861F /* ExtBrightness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExtBrightness.entitlements; sourceTree = "<group>"; };
+		029C2718210485E000DA861F /* ExtBrightness-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExtBrightness-Bridging-Header.h"; sourceTree = "<group>"; };
+		029C2719210485E100DA861F /* DDC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDC.h; sourceTree = "<group>"; };
+		029C27272105C32F00DA861F /* ExtneralScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtneralScreen.swift; sourceTree = "<group>"; };
+		02FB96D52105C83A00669B78 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StatusItemController.swift; path = /Users/liuzikai/Documents/Programming/macOS/ExtBrightness/ExtBrightness/StatusItemController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,11 +44,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		027BE0A82105F35A00AD379A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		029C26F82104755300DA861F = {
 			isa = PBXGroup;
 			children = (
 				029C27032104755300DA861F /* ExtBrightness */,
+				029C271E2104D30E00DA861F /* ddcctl */,
 				029C27022104755300DA861F /* Products */,
+				027BE0A82105F35A00AD379A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,9 +76,23 @@
 				029C27062104755500DA861F /* Assets.xcassets */,
 				029C27082104755500DA861F /* MainMenu.xib */,
 				029C270B2104755500DA861F /* Info.plist */,
+				02FB96D52105C83A00669B78 /* StatusItemController.swift */,
+				029C27272105C32F00DA861F /* ExtneralScreen.swift */,
+				025E0BE52105C63000ECC12E /* SliderView.swift */,
+				025E0BE62105C63000ECC12E /* SliderView.xib */,
+				029C2718210485E000DA861F /* ExtBrightness-Bridging-Header.h */,
 				029C270C2104755500DA861F /* ExtBrightness.entitlements */,
 			);
 			path = ExtBrightness;
+			sourceTree = "<group>";
+		};
+		029C271E2104D30E00DA861F /* ddcctl */ = {
+			isa = PBXGroup;
+			children = (
+				027BE0AB2105F79900AD379A /* DDC.c */,
+				029C2719210485E100DA861F /* DDC.h */,
+			);
+			path = ddcctl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,6 +127,7 @@
 				TargetAttributes = {
 					029C27002104755300DA861F = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -118,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025E0BE82105C63000ECC12E /* SliderView.xib in Resources */,
 				029C27072104755500DA861F /* Assets.xcassets in Resources */,
 				029C270A2104755500DA861F /* MainMenu.xib in Resources */,
 			);
@@ -130,7 +167,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025E0BE72105C63000ECC12E /* SliderView.swift in Sources */,
+				02FB96D62105C83A00669B78 /* StatusItemController.swift in Sources */,
 				029C27052104755300DA861F /* AppDelegate.swift in Sources */,
+				027BE0AC2105F79A00AD379A /* DDC.c in Sources */,
+				029C272A2105C32F00DA861F /* ExtneralScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ExtBrightness/ExtBrightness.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ExtBrightness/Info.plist;
@@ -273,8 +314,14 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.liuzikai.ExtBrightness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ExtBrightness/ExtBrightness-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -283,7 +330,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ExtBrightness/ExtBrightness.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ExtBrightness/Info.plist;
@@ -291,8 +338,13 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.liuzikai.ExtBrightness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ExtBrightness/ExtBrightness-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
