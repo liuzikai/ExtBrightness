@@ -5,16 +5,15 @@
 //  Created by Jonathan Taylor on 7/10/09.
 //  See http://github.com/jontaylor/DDC-CI-Tools-for-OS-X
 //
+//  Revised by liuzikai on 2018/7/24.
 
 #include <IOKit/IOKitLib.h>
 #include <IOKit/graphics/IOGraphicsLib.h>
-#include <ApplicationServices/ApplicationServices.h>
 #include "DDC.h"
 
-#define kMaxRequests 10
+#define kMaxRequests 5
 
 /*
- 
  Iterate IOreg's device tree to find the IOFramebuffer mach service port that corresponds to a given CGDisplayID
  replaces CGDisplayIOServicePort: https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/Quartz_Services_Ref/index.html#//apple_ref/c/func/CGDisplayIOServicePort
  based on: https://github.com/glfw/glfw/pull/192/files
@@ -361,7 +360,7 @@ bool EDIDTest(CGDirectDisplayID displayID, struct EDID *edid) {
     IOI2CRequest request = {};
     /*! from https://opensource.apple.com/source/IOGraphics/IOGraphics-513.1/IOGraphicsFamily/IOKit/i2c/IOI2CInterface.h.auto.html
      *  not in https://developer.apple.com/reference/kernel/1659924-ioi2cinterface.h/ioi2crequest?changes=latest_beta&language=objc
-     * @struct IOI2CRequest
+     * @structName IOI2CRequest
      * @abstract A structure defining an I2C bus transaction.
      * @discussion This structure is used to request an I2C transaction consisting of a send (write) to and reply (read) from a device, either of which is optional, to be carried out atomically on an I2C bus.
      * @field __reservedA Set to zero.

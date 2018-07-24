@@ -7,6 +7,7 @@
 //  See http://read.pudn.com/downloads110/ebook/456020/E-EDID%20Standard.pdf
 //  See ftp://ftp.cis.nctu.edu.tw/pub/csie/Software/X11/private/VeSaSpEcS/VESA_Document_Center_Monitor_Interface/EEDIDrAr2.pdf
 //
+//  Revised by liuzikai on 2018/7/24.
 
 #ifndef DDC_Panel_DDC_h
 #define DDC_Panel_DDC_h
@@ -238,5 +239,5 @@ struct EDID {
 bool DDCWrite(CGDirectDisplayID displayID, struct DDCWriteCommand *write);
 bool DDCRead(CGDirectDisplayID displayID, struct DDCReadCommand *read);
 bool EDIDTest(CGDirectDisplayID displayID, struct EDID *edid);
-UInt32 SupportedTransactionType();
+UInt32 SupportedTransactionType(void);
 #endif

@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020D5B5521071B0B000C2208 /* GlobalCtlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D5B5321071B0B000C2208 /* GlobalCtlViewController.swift */; };
+		020D5B5621071B0B000C2208 /* GlobalCtlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020D5B5421071B0B000C2208 /* GlobalCtlViewController.xib */; };
+		020D5B5921071C3E000C2208 /* DisplaysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D5B5821071C3E000C2208 /* DisplaysManager.swift */; };
 		022252AA210709D200F852D0 /* BuildInMonitorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 022252A8210709D100F852D0 /* BuildInMonitorControl.m */; };
-		025E0BE72105C63000ECC12E /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E0BE52105C63000ECC12E /* SliderView.swift */; };
-		025E0BE82105C63000ECC12E /* SliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025E0BE62105C63000ECC12E /* SliderView.xib */; };
+		025E0BE72105C63000ECC12E /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E0BE52105C63000ECC12E /* SliderViewController.swift */; };
+		025E0BE82105C63000ECC12E /* SliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025E0BE62105C63000ECC12E /* SliderViewController.xib */; };
 		027BE0AC2105F79A00AD379A /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 027BE0AB2105F79900AD379A /* DDC.c */; };
 		027BE0CB2106C87E00AD379A /* ExternalMonitorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 027BE0CA2106C87E00AD379A /* ExternalMonitorControl.m */; };
 		029C27052104755300DA861F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C27042104755300DA861F /* AppDelegate.swift */; };
@@ -20,10 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		020D5B5321071B0B000C2208 /* GlobalCtlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalCtlViewController.swift; sourceTree = "<group>"; };
+		020D5B5421071B0B000C2208 /* GlobalCtlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GlobalCtlViewController.xib; sourceTree = "<group>"; };
+		020D5B5821071C3E000C2208 /* DisplaysManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysManager.swift; sourceTree = "<group>"; };
 		022252A8210709D100F852D0 /* BuildInMonitorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildInMonitorControl.m; sourceTree = "<group>"; };
 		022252A9210709D100F852D0 /* BuildInMonitorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildInMonitorControl.h; sourceTree = "<group>"; };
-		025E0BE52105C63000ECC12E /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
-		025E0BE62105C63000ECC12E /* SliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderView.xib; sourceTree = "<group>"; };
+		025E0BE52105C63000ECC12E /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
+		025E0BE62105C63000ECC12E /* SliderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderViewController.xib; sourceTree = "<group>"; };
 		027BE0AB2105F79900AD379A /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
 		027BE0CA2106C87E00AD379A /* ExternalMonitorControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExternalMonitorControl.m; sourceTree = "<group>"; };
 		027BE0CC2106CA2100AD379A /* ExternalMonitorControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExternalMonitorControl.h; sourceTree = "<group>"; };
@@ -50,6 +56,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020D5B5721071B35000C2208 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02FB96D52105C83A00669B78 /* StatusItemController.swift */,
+				020D5B5821071C3E000C2208 /* DisplaysManager.swift */,
+				029C27272105C32F00DA861F /* DisplayController.swift */,
+				025E0BE52105C63000ECC12E /* SliderViewController.swift */,
+				025E0BE62105C63000ECC12E /* SliderViewController.xib */,
+				020D5B5321071B0B000C2208 /* GlobalCtlViewController.swift */,
+				020D5B5421071B0B000C2208 /* GlobalCtlViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		027BE0A82105F35A00AD379A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,8 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				029C27032104755300DA861F /* ExtBrightness */,
+				020D5B5721071B35000C2208 /* Views */,
 				027BE0E42107076100AD379A /* MonitorControl */,
-				029C271E2104D30E00DA861F /* ddcctl */,
 				029C27022104755300DA861F /* Products */,
 				027BE0A82105F35A00AD379A /* Frameworks */,
 			);
@@ -96,21 +116,10 @@
 				029C27062104755500DA861F /* Assets.xcassets */,
 				029C27082104755500DA861F /* MainMenu.xib */,
 				029C270B2104755500DA861F /* Info.plist */,
-				02FB96D52105C83A00669B78 /* StatusItemController.swift */,
-				029C27272105C32F00DA861F /* DisplayController.swift */,
-				025E0BE52105C63000ECC12E /* SliderView.swift */,
-				025E0BE62105C63000ECC12E /* SliderView.xib */,
 				029C2718210485E000DA861F /* ExtBrightness-Bridging-Header.h */,
 				029C270C2104755500DA861F /* ExtBrightness.entitlements */,
 			);
 			path = ExtBrightness;
-			sourceTree = "<group>";
-		};
-		029C271E2104D30E00DA861F /* ddcctl */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ddcctl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,9 +181,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025E0BE82105C63000ECC12E /* SliderView.xib in Resources */,
+				025E0BE82105C63000ECC12E /* SliderViewController.xib in Resources */,
 				029C27072104755500DA861F /* Assets.xcassets in Resources */,
 				029C270A2104755500DA861F /* MainMenu.xib in Resources */,
+				020D5B5621071B0B000C2208 /* GlobalCtlViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,11 +195,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025E0BE72105C63000ECC12E /* SliderView.swift in Sources */,
+				025E0BE72105C63000ECC12E /* SliderViewController.swift in Sources */,
 				027BE0CB2106C87E00AD379A /* ExternalMonitorControl.m in Sources */,
 				02FB96D62105C83A00669B78 /* StatusItemController.swift in Sources */,
+				020D5B5521071B0B000C2208 /* GlobalCtlViewController.swift in Sources */,
 				029C27052104755300DA861F /* AppDelegate.swift in Sources */,
 				022252AA210709D200F852D0 /* BuildInMonitorControl.m in Sources */,
+				020D5B5921071C3E000C2208 /* DisplaysManager.swift in Sources */,
 				027BE0AC2105F79A00AD379A /* DDC.c in Sources */,
 				029C272A2105C32F00DA861F /* DisplayController.swift in Sources */,
 			);

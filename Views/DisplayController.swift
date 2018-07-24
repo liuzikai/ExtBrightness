@@ -10,12 +10,20 @@ import Cocoa
 
 enum DisplayType {
     case BuildIn
-    case ExternalOnline
-    case ExternalOffline
+    // Build-in displays are accessed with buildinSet/GetBrightness(), which uses Cocoa APIs
+    
+    case ExternalOnline      // 'Online' means brightness values can be retrieved with DDC
+    case ExternalOffline     // 'Offline' means brightness values can only be set but not read with DDC
+    // External displays are accessed with extSet/GetBrightness(), which uses DDC for communication
 }
 
+/// This class handle displays parameters
 class DisplayController: NSObject {
 
+    var valid = false
+    // If a display is no longer accessible, its controller is set as invalid but not release,
+    // which allows brightness values to be kept for offline external display
+    
     var screenObject: NSScreen!
     var displayID: CGDirectDisplayID!
     var displayType: DisplayType!
@@ -23,9 +31,11 @@ class DisplayController: NSObject {
     var screenSerial: String?
     var screenName: String?
     
-    var brightness: Double = 0.5
+    var brightness: Double = 0.5  // Range: 0.0 - 1.0
     
-    var maxBrightness: UInt8 = 100 // For external display
+                                   // For internal display, the brightness range is 0.0 to 1.0
+    var maxBrightness: UInt8 = 100 // For external display, the brightness range depends on monitor
+    //TODO: make maxBrightness configurable
     
     func reloadBrightness() {
         if (displayType == DisplayType.BuildIn) {
@@ -48,6 +58,7 @@ class DisplayController: NSObject {
         } else {
             ret = extSetBrightness(displayID, UInt8(Int(Double(maxBrightness) * newValue)))
         }
+        // If fail to set new value, do not update stored brightness value
         if ret {
             brightness = newValue
         }
@@ -63,5 +74,6 @@ class DisplayController: NSObject {
         } else {
             screenName = extGetScreenName(id)
         }
+
     }
 }

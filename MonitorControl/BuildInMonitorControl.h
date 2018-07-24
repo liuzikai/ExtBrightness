@@ -1,3 +1,14 @@
+//
+//  BuildInMonitorControl.h
+//  ExtBrightness
+//
+//  This file contains helpers functions to control build-in display
+//  Code is mainly extracted from [Brightness Menulet](http://www.alecjacobson.com/weblog/?p=1127)
+//
+//  Created by liuzikai on 2018/7/24.
+//  Copyright © 2018 liuzikai. All rights reserved.
+//
+
 #ifndef AppController_h
 #define AppController_h
 

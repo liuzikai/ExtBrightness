@@ -8,13 +8,21 @@
 
 import Cocoa
 
+/// This class handles status item and popup menu
 class StatusItemController: NSObject {
     
     var statusItem: NSStatusItem!
-    var menu: NSMenu!
-    var quitMenuItem: NSMenuItem!
-    var sliderControllers: [CGDirectDisplayID: SliderView] = [:]
     
+    var menu: NSMenu!
+    var globalCtlViewController: GlobalCtlViewController!
+    var globalCtlItem: NSMenuItem!
+    var sliderControllers: [SliderViewController] = []
+    var quitItem: NSMenuItem!
+    
+    let displaysManager = DisplaysManager()
+    
+    
+    /// Create an item on status bar
     private func createStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.target = self
@@ -24,74 +32,69 @@ class StatusItemController: NSObject {
         statusItem.image = icon
     }
     
-    private func createPopoverAndController() {
-        var viewArray: NSArray?
-        Bundle.main.loadNibNamed(NSNib.Name(rawValue: "PopViewController"), owner: self, topLevelObjects: &viewArray)
+    /// Create common menu items, incluing global control item and quit item
+    private func createCommonMenuItems() {
+        globalCtlViewController = GlobalCtlViewController()
+        globalCtlViewController.displaysManager = displaysManager
+        globalCtlViewController.menuController = self
+        
+        globalCtlItem = NSMenuItem()
+        globalCtlItem.view = globalCtlViewController.view
+        
+        quitItem = NSMenuItem()
+        quitItem.title = "Quit"
+        quitItem.target = self
+        quitItem.action = #selector(quitItemClick)
+        
     }
     
     override init() {
         super.init()
         
         createStatusItem()
-        createPopoverAndController()
-    }
-    
-    fileprivate func iterateScreen() {
-        for screen in NSScreen.screens {
-            let descriptions = screen.deviceDescription
-            if (descriptions[NSDeviceDescriptionKey.isScreen] != nil) {
-                let displayID = descriptions[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
-                let slider: SliderView
-                if (sliderControllers.keys.contains(displayID)) {
-                    slider = sliderControllers[displayID]!
-                } else {
-                    slider = SliderView()
-                    
-                    
-                    let controller: DisplayController
-                    
-                    if (CGDisplayIsBuiltin(displayID) != 0) {
-                        // Is build-in display
-                        controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.BuildIn)
-                    } else {
-                        if (extGetBrightness(displayID, nil, nil)) {
-                            controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalOnline)
-                        } else {
-                            controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalOffline)
-                        }
-                    }
-                    
-                    slider.displayController = controller
-                    sliderControllers[displayID] = slider
-                    
-                    
-                }
-                slider.displayController.reloadBrightness()
-                let item = NSMenuItem()
-                item.view = slider.view
-                menu.addItem(item)
-            }
-        }
+        createCommonMenuItems()
     }
     
     @objc private func statusItemClick(_ sender: Any) {
-        menu = NSMenu()
         
-        iterateScreen()
+        // Reset menu
+        menu = NSMenu()
+        sliderControllers = []
+        
+        menu.addItem(globalCtlItem)
         
         menu.addItem(NSMenuItem.separator())
         
-        quitMenuItem = NSMenuItem()
-        quitMenuItem.title = "Quit"
-        quitMenuItem.target = self
-        quitMenuItem.action = #selector(quitMenuItemClick)
-        menu.addItem(quitMenuItem)
+        // Call displaysManager to reload connected displays
+        displaysManager.iterateDisplays()
+        for controller in displaysManager.displayController.values {
+            if controller.valid {
+                let sliderController = SliderViewController()
+                sliderController.displayController = controller
+                
+                sliderControllers.append(sliderController)
+                
+                let item = NSMenuItem()
+                item.view = sliderController.view
+                menu.addItem(item)
+            }
+        }
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        menu.addItem(quitItem)
         
         statusItem.popUpMenu(menu)
     }
     
-    @objc private func quitMenuItemClick(_ sender: Any) {
+    @objc private func quitItemClick(_ sender: Any) {
         NSApp.terminate(sender)
+    }
+    
+    func reloadAllBrightness() {
+        for sliderController in sliderControllers {
+            sliderController.loadDataFromDisplayController()
+        }
     }
 }
 
