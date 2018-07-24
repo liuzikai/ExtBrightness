@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ddc_helper.h"
+#import "ExternalMonitorControl.h"
 
 NSString *getEDIDString(char *string)
 {
@@ -15,7 +15,7 @@ NSString *getEDIDString(char *string)
     return ([temp rangeOfString:@"\n"].location != NSNotFound) ? [[temp componentsSeparatedByString:@"\n"] objectAtIndex:0] : temp;
 }
 
-NSString *ddcGetScreenName(CGDirectDisplayID displayID) {
+NSString *extGetScreenName(CGDirectDisplayID displayID) {
     struct EDID edid = {};
     if (EDIDTest(displayID, &edid)) {
         for (union descriptor *des = edid.descriptors; des < edid.descriptors + sizeof(edid.descriptors); des++) {
@@ -27,7 +27,17 @@ NSString *ddcGetScreenName(CGDirectDisplayID displayID) {
     return nil;
 }
 
-BOOL ddcSetBrightness(CGDirectDisplayID displayID, UInt8 brightness) {
+BOOL extSetBrightness(CGDirectDisplayID displayID, UInt8 brightness) {
     struct DDCWriteCommand command = {BRIGHTNESS, brightness};
     return DDCWrite(displayID, &command);
+}
+
+BOOL extGetBrightness(CGDirectDisplayID displayID, UInt8 *brightness, UInt8 *maxValue) {
+    struct DDCReadCommand command = {BRIGHTNESS, 0, 0};
+    if(DDCRead(displayID, &command)) {
+        *brightness = command.current_value;
+        *maxValue = command.max_value;
+        return true;
+    }
+    return false;
 }

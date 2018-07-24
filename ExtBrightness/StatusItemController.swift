@@ -13,7 +13,7 @@ class StatusItemController: NSObject {
     var statusItem: NSStatusItem!
     var menu: NSMenu!
     var quitMenuItem: NSMenuItem!
-    var viewControllers: [CGDirectDisplayID: SliderView] = [:]
+    var sliderControllers: [CGDirectDisplayID: SliderView] = [:]
     
     private func createStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -41,21 +41,35 @@ class StatusItemController: NSObject {
             let descriptions = screen.deviceDescription
             if (descriptions[NSDeviceDescriptionKey.isScreen] != nil) {
                 let displayID = descriptions[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
-                if (CGDisplayIsBuiltin(displayID) == 0) {
+                let slider: SliderView
+                if (sliderControllers.keys.contains(displayID)) {
+                    slider = sliderControllers[displayID]!
+                } else {
+                    slider = SliderView()
                     
-                    let controller: SliderView
-                    if (viewControllers.keys.contains(displayID)) {
-                        controller = viewControllers[displayID]!
+                    
+                    let controller: DisplayController
+                    
+                    if (CGDisplayIsBuiltin(displayID) != 0) {
+                        // Is build-in display
+                        controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.BuildIn)
                     } else {
-                        controller = SliderView()
-                        controller.externalScreen = ExtneralScreen(screenObject: screen, displayID: displayID)
-                        viewControllers[displayID] = controller
+                        if (extGetBrightness(displayID, nil, nil)) {
+                            controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalOnline)
+                        } else {
+                            controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalOffline)
+                        }
                     }
                     
-                    let item = NSMenuItem()
-                    item.view = controller.view
-                    menu.addItem(item)
+                    slider.displayController = controller
+                    sliderControllers[displayID] = slider
+                    
+                    
                 }
+                slider.displayController.reloadBrightness()
+                let item = NSMenuItem()
+                item.view = slider.view
+                menu.addItem(item)
             }
         }
     }

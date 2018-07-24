@@ -221,10 +221,6 @@ bool DDCRead(CGDirectDisplayID displayID, struct DDCReadCommand *read) {
         result = DisplayRequest(displayID, &request);
         result = (result && reply_data[0] == request.sendAddress && reply_data[2] == 0x2 && reply_data[4] == read->control_id && reply_data[10] == (request.replyAddress ^ request.replySubAddress ^ reply_data[1] ^ reply_data[2] ^ reply_data[3] ^ reply_data[4] ^ reply_data[5] ^ reply_data[6] ^ reply_data[7] ^ reply_data[8] ^ reply_data[9]));
         
-        for(int i = 0; i < 11; i++){
-            printf("reply_data[%d] = %d\n", i, reply_data[i]);
-        }
-        
         if (result) { // checksum is ok
             if (i > 1) {
                 printf("D: Tries required to get data: %d \n", i);

@@ -11,7 +11,8 @@
 
 #import "DDC.h"
 
-NSString *ddcGetScreenName(CGDirectDisplayID displayID);
-BOOL ddcSetBrightness(CGDirectDisplayID displayID, UInt8 brightness);
+NSString *extGetScreenName(CGDirectDisplayID displayID);
+BOOL extSetBrightness(CGDirectDisplayID displayID, UInt8 brightness);
+BOOL extGetBrightness(CGDirectDisplayID displayID, UInt8 *brightness, UInt8 *maxValue);
 
 #endif /* ddc_helper_h */
