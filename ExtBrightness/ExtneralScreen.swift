@@ -11,30 +11,24 @@ import Cocoa
 class ExtneralScreen: NSObject {
 
     var screenObject: NSScreen!
-    
     var displayID: CGDirectDisplayID!
+//    var screenSerial: String?
+    var screenName: String?
     
     var brightness: UInt8 = 50
     var maxBrightness: UInt8 = 100
-    
         
     func setBrightness(_ newValue: UInt8) -> Bool {
-
-        var ddcWriteCommand: DDCWriteCommand = DDCWriteCommand(control_id: UInt8(BRIGHTNESS), new_value: newValue)
-        let ret: Bool = Bool(DDCWrite(displayID, &ddcWriteCommand))
+        let ret = ddcSetBrightness(displayID, newValue)
         if ret {
             brightness = newValue
         }
         return ret
     }
     
-    init(withScreenObject screen: NSScreen) {
+    init(screenObject screen: NSScreen, displayID id: CGDirectDisplayID) {
         screenObject = screen
-        let description = screenObject.deviceDescription
-        displayID = description[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
-    }
-    
-    init(withDisplayID id: CGDirectDisplayID) {
         displayID = id
+        screenName = ddcGetScreenName(id)
     }
 }

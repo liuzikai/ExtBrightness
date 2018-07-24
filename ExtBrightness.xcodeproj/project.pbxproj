@@ -10,6 +10,7 @@
 		025E0BE72105C63000ECC12E /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E0BE52105C63000ECC12E /* SliderView.swift */; };
 		025E0BE82105C63000ECC12E /* SliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025E0BE62105C63000ECC12E /* SliderView.xib */; };
 		027BE0AC2105F79A00AD379A /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 027BE0AB2105F79900AD379A /* DDC.c */; };
+		027BE0CB2106C87E00AD379A /* ddc_helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 027BE0CA2106C87E00AD379A /* ddc_helper.m */; };
 		029C27052104755300DA861F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C27042104755300DA861F /* AppDelegate.swift */; };
 		029C27072104755500DA861F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 029C27062104755500DA861F /* Assets.xcassets */; };
 		029C270A2104755500DA861F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029C27082104755500DA861F /* MainMenu.xib */; };
@@ -21,6 +22,8 @@
 		025E0BE52105C63000ECC12E /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		025E0BE62105C63000ECC12E /* SliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderView.xib; sourceTree = "<group>"; };
 		027BE0AB2105F79900AD379A /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
+		027BE0CA2106C87E00AD379A /* ddc_helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ddc_helper.m; sourceTree = "<group>"; };
+		027BE0CC2106CA2100AD379A /* ddc_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ddc_helper.h; sourceTree = "<group>"; };
 		029C27012104755300DA861F /* ExtBrightness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExtBrightness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		029C27042104755300DA861F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		029C27062104755500DA861F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +94,8 @@
 			children = (
 				027BE0AB2105F79900AD379A /* DDC.c */,
 				029C2719210485E100DA861F /* DDC.h */,
+				027BE0CA2106C87E00AD379A /* ddc_helper.m */,
+				027BE0CC2106CA2100AD379A /* ddc_helper.h */,
 			);
 			path = ddcctl;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				025E0BE72105C63000ECC12E /* SliderView.swift in Sources */,
+				027BE0CB2106C87E00AD379A /* ddc_helper.m in Sources */,
 				02FB96D62105C83A00669B78 /* StatusItemController.swift in Sources */,
 				029C27052104755300DA861F /* AppDelegate.swift in Sources */,
 				027BE0AC2105F79A00AD379A /* DDC.c in Sources */,

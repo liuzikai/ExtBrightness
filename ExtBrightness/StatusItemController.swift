@@ -12,8 +12,8 @@ class StatusItemController: NSObject {
     
     var statusItem: NSStatusItem!
     var menu: NSMenu!
-    var menuItems: [NSMenuItem] = []
-    var viewControllers: [SliderView] = []
+    var quitMenuItem: NSMenuItem!
+    var viewControllers: [CGDirectDisplayID: SliderView] = [:]
     
     private func createStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -36,24 +36,48 @@ class StatusItemController: NSObject {
         createPopoverAndController()
     }
     
-    @objc private func statusItemClick(_ sender: Any) {
-        menu = NSMenu()
+    fileprivate func iterateScreen() {
         for screen in NSScreen.screens {
-            let description = screen.deviceDescription
-            let displayID = description[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
-            if (CGDisplayIsBuiltin(displayID) == 0) {
-                let item = NSMenuItem(title: "", action: nil, keyEquivalent: "")
-                let controller = SliderView()
-                controller.loadView()
-                controller.externalScreen = ExtneralScreen.init(withDisplayID: displayID)
-                item.view = controller.view
-                menuItems.append(item)
-                viewControllers.append(controller)
-                menu.addItem(item)
+            let descriptions = screen.deviceDescription
+            if (descriptions[NSDeviceDescriptionKey.isScreen] != nil) {
+                let displayID = descriptions[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
+                if (CGDisplayIsBuiltin(displayID) == 0) {
+                    
+                    let controller: SliderView
+                    if (viewControllers.keys.contains(displayID)) {
+                        controller = viewControllers[displayID]!
+                    } else {
+                        controller = SliderView()
+                        controller.externalScreen = ExtneralScreen(screenObject: screen, displayID: displayID)
+                        viewControllers[displayID] = controller
+                    }
+                    
+                    let item = NSMenuItem()
+                    item.view = controller.view
+                    menu.addItem(item)
+                }
             }
         }
+    }
+    
+    @objc private func statusItemClick(_ sender: Any) {
+        menu = NSMenu()
+        
+        iterateScreen()
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        quitMenuItem = NSMenuItem()
+        quitMenuItem.title = "Quit"
+        quitMenuItem.target = self
+        quitMenuItem.action = #selector(quitMenuItemClick)
+        menu.addItem(quitMenuItem)
+        
         statusItem.popUpMenu(menu)
     }
     
+    @objc private func quitMenuItemClick(_ sender: Any) {
+        NSApp.terminate(sender)
+    }
 }
 

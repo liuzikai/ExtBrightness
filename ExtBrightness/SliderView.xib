@@ -7,26 +7,54 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SliderView" customModule="ExtBrightness" customModuleProvider="target">
             <connections>
+                <outlet property="screenName" destination="ZgE-r9-v3O" id="0Fs-rR-kdn"/>
                 <outlet property="slider" destination="QrR-P9-aGj" id="ZwM-45-HTW"/>
+                <outlet property="sliderValueLabel" destination="EsR-YG-31x" id="1Wh-EJ-DfW"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="108" height="40"/>
+            <rect key="frame" x="0.0" y="0.0" width="177" height="46"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QrR-P9-aGj">
-                    <rect key="frame" x="6" y="10" width="96" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="owR-kn-a0A"/>
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QrR-P9-aGj">
+                    <rect key="frame" x="18" y="1" width="108" height="19"/>
+                    <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="52.479166666666664" tickMarkPosition="above" sliderType="linear" id="owR-kn-a0A"/>
                     <connections>
-                        <action selector="sliderChange:" target="-2" id="4P8-Hu-9p4"/>
+                        <action selector="sliderChanged:" target="-2" id="Grc-FS-Xoa"/>
                     </connections>
                 </slider>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EsR-YG-31x">
+                    <rect key="frame" x="132" y="2" width="27" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="100" id="NjH-Rq-HXR">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZgE-r9-v3O">
+                    <rect key="frame" x="18" y="26" width="141" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="K5x-4b-RJI">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
-            <point key="canvasLocation" x="-2" y="53"/>
+            <constraints>
+                <constraint firstItem="EsR-YG-31x" firstAttribute="leading" secondItem="QrR-P9-aGj" secondAttribute="trailing" constant="10" id="Q5B-Fm-Fg2"/>
+                <constraint firstItem="QrR-P9-aGj" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="Tu9-uX-Csc"/>
+                <constraint firstItem="ZgE-r9-v3O" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="cgD-XY-sJX"/>
+                <constraint firstItem="QrR-P9-aGj" firstAttribute="top" secondItem="ZgE-r9-v3O" secondAttribute="bottom" constant="8" id="iOC-lx-t7i"/>
+                <constraint firstAttribute="bottom" secondItem="QrR-P9-aGj" secondAttribute="bottom" constant="3" id="ib2-o9-9Fm"/>
+                <constraint firstAttribute="trailing" secondItem="ZgE-r9-v3O" secondAttribute="trailing" constant="20" symbolic="YES" id="kkH-6o-mOL"/>
+                <constraint firstAttribute="trailing" secondItem="EsR-YG-31x" secondAttribute="trailing" constant="20" symbolic="YES" id="odj-ql-sxr"/>
+                <constraint firstItem="ZgE-r9-v3O" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="tcL-Mi-wZv"/>
+                <constraint firstItem="EsR-YG-31x" firstAttribute="centerY" secondItem="QrR-P9-aGj" secondAttribute="centerY" id="txR-Bx-ddy"/>
+            </constraints>
+            <point key="canvasLocation" x="32.5" y="63"/>
         </customView>
     </objects>
 </document>

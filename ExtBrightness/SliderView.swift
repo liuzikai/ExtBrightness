@@ -11,16 +11,28 @@ import Cocoa
 class SliderView: NSViewController {
 
     @IBOutlet weak var slider: NSSlider!
+    @IBOutlet weak var sliderValueLabel: NSTextField!
+    @IBOutlet weak var screenName: NSTextField!
+    
+//    weak var menuItem: NSMenuItem!
+    
     var externalScreen: ExtneralScreen!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do view setup here.
+    override func loadView() {
+        super.loadView()
+        
         slider.maxValue = Double(externalScreen.maxBrightness)
         slider.doubleValue = Double(externalScreen.brightness)
+        sliderValueLabel.stringValue = String(Int(slider.doubleValue))
+        
+        screenName.stringValue = externalScreen.screenName ?? "Unknown display"
     }
     
-    @IBAction func sliderChange(_ sender: Any) {
-        _ = externalScreen.setBrightness(UInt8(Int(slider.doubleValue)))
+    @IBAction func sliderChanged(_ sender: Any) {
+        sliderValueLabel.stringValue = String(Int(slider.doubleValue))
+        if (!externalScreen.setBrightness(UInt8(Int(slider.doubleValue)))) {
+            // If fail to set brightness, reload brightness value to the slider
+            slider.doubleValue = Double(externalScreen.brightness)
+        }
     }
 }
