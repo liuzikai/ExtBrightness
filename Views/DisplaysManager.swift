@@ -28,15 +28,17 @@ class DisplaysManager: NSObject {
         for screen in NSScreen.screens {
             let descriptions = screen.deviceDescription
             if (descriptions[NSDeviceDescriptionKey.isScreen] != nil) {
+                
                 let displayID = descriptions[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
+                
+                let controller: DisplayController
+                
                 if (displayController.keys.contains(displayID)) {
                     // If there is already a controller for the display, set it as valid and it will show in the popover.
-                    displayController[displayID]!.valid = true
+                    controller = displayController[displayID]!
                 } else {
                     // If not, create a new controller
-                    
-                    let controller: DisplayController
-                    
+
                     if (CGDisplayIsBuiltin(displayID) != 0) {
                         // Is build-in display
                         controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.BuildIn)
@@ -53,11 +55,11 @@ class DisplaysManager: NSObject {
                         }
                     }
                     
-                    controller.reloadBrightness()
-                    controller.valid = true
-                    
                     displayController[displayID] = controller
                 }
+                
+                controller.reloadBrightness()
+                controller.valid = true
             }
         }
     }

@@ -16,22 +16,29 @@
 const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 
 float buildInGetBrightness(CGDirectDisplayID dspy) {
-    CGDisplayErr err;
+
+    float brightness = -1.0f;
     
-    CFDictionaryRef originalMode = CGDisplayCurrentMode(dspy);
-    if (originalMode == NULL)
-        return -1.0;
-    io_service_t service = CGDisplayIOServicePort(dspy);
-    
-    float brightness;
-    err = IODisplayGetFloatParameter(service, kNilOptions, kDisplayBrightness,
-                                    &brightness);
-    if (err != kIOReturnSuccess) {
-        fprintf(stderr,
-                "failed to get brightness of display 0x%x (error %d)",
-                (unsigned int)dspy, err);
-        return -1.0;
+    io_iterator_t iterator;
+    kern_return_t result = IOServiceGetMatchingServices(kIOMasterPortDefault,
+                                 IOServiceMatching("IODisplayConnect"),
+                                 &iterator);
+    // If we were successful
+    if (result == kIOReturnSuccess)
+    {
+        io_object_t service;
+        
+        while ((service = IOIteratorNext(iterator)))
+        {
+            IODisplayGetFloatParameter(service,
+                                       kNilOptions,
+                                       CFSTR(kIODisplayBrightnessKey),
+                                       &brightness);
+            // Let the object go
+            IOObjectRelease(service);
+        }
     }
+    
     return brightness;
 }
 

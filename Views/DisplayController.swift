@@ -39,7 +39,10 @@ class DisplayController: NSObject {
     
     func reloadBrightness() {
         if (displayType == DisplayType.BuildIn) {
-            brightness = Double(buildInGetBrightness(displayID))
+            let newValue = Double(buildInGetBrightness(displayID))
+            if 0.0 <= newValue && newValue <= 1.0 {
+                brightness = newValue
+            }
         } else if (displayType == DisplayType.ExternalOnline) {
             var tmpBrightness: UInt8 = 0
             var tmpMaxBrightness: UInt8 = 0
