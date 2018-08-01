@@ -24,13 +24,16 @@ class DisplaysManager: NSObject {
             controller.valid = false
         }
         
+        // Iterate through screen objects
         for screen in NSScreen.screens {
             let descriptions = screen.deviceDescription
             if (descriptions[NSDeviceDescriptionKey.isScreen] != nil) {
                 let displayID = descriptions[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
                 if (displayController.keys.contains(displayID)) {
+                    // If there is already a controller for the display, set it as valid and it will show in the popover.
                     displayController[displayID]!.valid = true
                 } else {
+                    // If not, create a new controller
                     
                     let controller: DisplayController
                     
@@ -38,11 +41,14 @@ class DisplaysManager: NSObject {
                         // Is build-in display
                         controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.BuildIn)
                     } else {
+                        // Is external display
                         if (extGetBrightness(displayID, nil, nil)) {
+                            // If the program can get the brightness value, the display will classified as "online."
                             controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalOnline)
                         } else {
+                            // If not, it will be classified as "offline."
                             controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalOffline)
-                            extSleepBetweenCommands()
+//                            extSleepBetweenCommands()
 //                            _ = controller.setBrightness(controller.brightness)
                         }
                     }
@@ -59,7 +65,14 @@ class DisplaysManager: NSObject {
     func adjustAllBrightness(_ offset: Double) {
         for controller in displayController.values {
             if controller.valid {
-                _ = controller.setBrightness(controller.brightness + offset)
+                var newValue = controller.brightness + offset
+                // Clip brightness value
+                if newValue < 0.0 {
+                    newValue = 0.0
+                } else if newValue > 1.0 {
+                    newValue = 1.0
+                }
+                _ = controller.setBrightness(newValue)
             }
         }
     }
