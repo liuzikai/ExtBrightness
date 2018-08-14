@@ -37,20 +37,32 @@ class DisplayController: NSObject {
     var maxBrightness: UInt8 = 100 // For external display, the brightness range depends on monitor
     //TODO: make maxBrightness configurable
     
-    func reloadBrightness() {
+    func reloadBrightness() -> Bool {
+        let newValue: Double
         if (displayType == DisplayType.BuildIn) {
-            let newValue = Double(buildInGetBrightness(displayID))
+            newValue = Double(buildInGetBrightness(displayID))
             if 0.0 <= newValue && newValue <= 1.0 {
-                brightness = newValue
+                
+            } else {
+                print("Internal brightness invalid.")
+                return false
             }
         } else if (displayType == DisplayType.ExternalOnline) {
             var tmpBrightness: UInt8 = 0
             var tmpMaxBrightness: UInt8 = 0
             if (!extGetBrightness(displayID, &tmpBrightness, &tmpMaxBrightness)) {
-                print("Fail to get external brightness")
-                return;
+                print("Fail to get external brightness.")
+                return false;
             }
-            brightness = Double(tmpBrightness) / Double(tmpMaxBrightness)
+            newValue = Double(tmpBrightness) / Double(tmpMaxBrightness)
+        } else {
+            return false
+        }
+        if newValue != brightness {
+            brightness = newValue
+            return true
+        } else {
+            return false
         }
     }
     

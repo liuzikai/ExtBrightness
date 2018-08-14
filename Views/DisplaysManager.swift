@@ -15,12 +15,12 @@ import Cocoa
 /// which allow brightness value to be remembered
 class DisplaysManager: NSObject {
     
-    var displayController: [CGDirectDisplayID: DisplayController] = [:]
+    var displayControllers: [CGDirectDisplayID: DisplayController] = [:]
     
     func iterateDisplays() {
         
         // Unset flags of all controllers
-        for controller in displayController.values {
+        for controller in displayControllers.values {
             controller.valid = false
         }
         
@@ -33,9 +33,9 @@ class DisplaysManager: NSObject {
                 
                 let controller: DisplayController
                 
-                if (displayController.keys.contains(displayID)) {
+                if (displayControllers.keys.contains(displayID)) {
                     // If there is already a controller for the display, set it as valid and it will show in the popover.
-                    controller = displayController[displayID]!
+                    controller = displayControllers[displayID]!
                 } else {
                     // If not, create a new controller
 
@@ -50,22 +50,28 @@ class DisplaysManager: NSObject {
                         } else {
                             // If not, it will be classified as "offline."
                             controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalOffline)
-//                            extSleepBetweenCommands()
-//                            _ = controller.setBrightness(controller.brightness)
+                            
+                            // Set the brightness to the default value the first time it's detected.
+                            //  Unless it's adjusted externally later, the brightness will match the stored value.
+                            //  For some monitor (such as my LG27UK850), the first attempt to set will fail (although the function return true.)
+                            extSleepBetweenCommands()
+                            print(controller.setBrightness(controller.brightness))
+                            extSleepBetweenCommands()
+                            print(controller.setBrightness(controller.brightness))
                         }
                     }
                     
-                    displayController[displayID] = controller
+                    displayControllers[displayID] = controller
                 }
                 
-                controller.reloadBrightness()
+                _ = controller.reloadBrightness()
                 controller.valid = true
             }
         }
     }
     
     func adjustAllBrightness(_ offset: Double) {
-        for controller in displayController.values {
+        for controller in displayControllers.values {
             if controller.valid {
                 var newValue = controller.brightness + offset
                 // Clip brightness value

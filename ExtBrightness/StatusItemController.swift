@@ -21,6 +21,7 @@ class StatusItemController: NSObject {
     
     let displaysManager = DisplaysManager()
     
+    var updateTimer: Timer!
     
     /// Create an item on status bar
     private func createStatusItem() {
@@ -53,12 +54,14 @@ class StatusItemController: NSObject {
         
         createStatusItem()
         createCommonMenuItems()
+        displaysManager.iterateDisplays()
     }
     
     @objc private func statusItemClick(_ sender: Any) {
         
         // Reset menu
         menu = NSMenu()
+        menu.delegate = self
         sliderControllers = []
         
         menu.addItem(globalCtlItem)
@@ -67,7 +70,7 @@ class StatusItemController: NSObject {
         
         // Call displaysManager to reload connected displays
         displaysManager.iterateDisplays()
-        for controller in displaysManager.displayController.values {
+        for controller in displaysManager.displayControllers.values {
             if controller.valid {
                 let sliderController = SliderViewController()
                 sliderController.displayController = controller
@@ -84,11 +87,26 @@ class StatusItemController: NSObject {
         
         menu.addItem(quitItem)
         
+        // Add a timer to monitor brightness changes
+        updateTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTimerFire), userInfo: nil, repeats: true)
+        RunLoop.main.add(updateTimer, forMode: .commonModes)
+        print("updateTimer inited.")
+        
         statusItem.popUpMenu(menu)
     }
     
     @objc private func quitItemClick(_ sender: Any) {
         NSApp.terminate(sender)
+    }
+    
+    @objc private func updateTimerFire(_ sender: Any) {
+        for sliderController in sliderControllers {
+            if sliderController.displayController.reloadBrightness() {
+                sliderController.loadDataFromDisplayController()
+                // Only set the slider if brightness is updated, or timer will prevent the user from sliding the slider
+            }
+        }
+        print("updateTimer fired.")
     }
     
     func reloadAllBrightness() {
@@ -98,3 +116,14 @@ class StatusItemController: NSObject {
     }
 }
 
+extension StatusItemController: NSMenuDelegate {
+    func menuDidClose(_ menu: NSMenu) {
+        if (updateTimer != nil) {
+            if updateTimer.isValid {
+                updateTimer.invalidate()
+                updateTimer = nil
+                print("updateTimer invalidated.")
+            }
+        }
+    }
+}
