@@ -15,13 +15,13 @@ class GlobalCtlViewController: NSViewController {
     weak var displaysManager: DisplaysManager!
     weak var menuController: StatusItemController!
     
-    let smallOffset: Double = 0.02   // When option is pressed, adjust brightness with smaller steps
-    let normalOffset: Double = 0.05
-    let largeOffset: Double = 0.1    // When shift is pressed, adjust brightness with larger steps
+    let smallOffset: Float = 0.02   // When option is pressed, adjust brightness with smaller steps
+    let normalOffset: Float = 0.05
+    let largeOffset: Float = 0.1    // When shift is pressed, adjust brightness with larger steps
     
     
     /// Return the step offset based on the state of function keys
-    var offset: Double {
+    var offset: Float {
         let event = NSApp.currentEvent!
         if (event.modifierFlags.contains(.option)) {
             return smallOffset

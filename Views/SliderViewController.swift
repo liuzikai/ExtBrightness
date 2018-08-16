@@ -19,21 +19,29 @@ class SliderViewController: NSViewController {
     
     func loadDataFromDisplayController() {
         slider.maxValue = 1.0
-        slider.doubleValue = displayController.brightness
+        slider.doubleValue = Double(displayController.brightness)
         
         screenName.stringValue = displayController.screenName ?? "Unknown display"
     }
     
     override func loadView() {
         super.loadView()
-        
+        if displayController.displayType == DisplayType.BuildIn {
+            screenName.toolTip = "Build-In Display"
+        } else if displayController.displayType == DisplayType.ExternalNative {
+            screenName.toolTip = "External Display (Native)"
+        } else if displayController.displayType == DisplayType.ExternalOnline {
+            screenName.toolTip = "External Display (Online)"
+        } else if displayController.displayType == DisplayType.ExternalOffline {
+            screenName.toolTip = "External Display (Offline)"
+        }
         loadDataFromDisplayController()
     }
     
     @IBAction func sliderChanged(_ sender: Any) {
-        if (!displayController.setBrightness(slider.doubleValue)) {
+        if (!displayController.setBrightness(Float(slider.doubleValue))) {
             // If fail to set brightness, reload brightness value to the slider
-            slider.doubleValue = displayController.brightness
+            slider.doubleValue = Double(displayController.brightness)
         }
     }
 }

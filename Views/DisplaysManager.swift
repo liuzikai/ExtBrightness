@@ -44,8 +44,14 @@ class DisplaysManager: NSObject {
                         controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.BuildIn)
                     } else {
                         // Is external display
-                        if (extGetBrightness(displayID, nil, nil)) {
-                            // If the program can get the brightness value, the display will classified as "online."
+                        
+                        let tmpBrightness = nativeGetBrightness(displayID)
+                        if tmpBrightness != -1.0 && nativeSetBrightness(displayID, tmpBrightness) {
+                            // If the program can get and set the brightness value with native Cocoa APIs, the display will classified as "native."
+                            controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalNative)
+                        }
+                        else if (extGetBrightness(displayID, nil, nil)) {
+                            // If the program can get the brightness value with DDC, the display will classified as "online."
                             controller = DisplayController(screenObject: screen, displayID: displayID, displayType: DisplayType.ExternalOnline)
                         } else {
                             // If not, it will be classified as "offline."
@@ -65,12 +71,15 @@ class DisplaysManager: NSObject {
                 }
                 
                 _ = controller.reloadBrightness()
+                if controller.extDarkness != globalExtDarkness {
+                    _ = controller.setExtDarkness(globalExtDarkness)
+                }
                 controller.valid = true
             }
         }
     }
     
-    func adjustAllBrightness(_ offset: Double) {
+    func adjustAllBrightness(_ offset: Float) {
         for controller in displayControllers.values {
             if controller.valid {
                 var newValue = controller.brightness + offset
@@ -81,6 +90,19 @@ class DisplaysManager: NSObject {
                     newValue = 1.0
                 }
                 _ = controller.setBrightness(newValue)
+            }
+        }
+    }
+    
+    var globalExtDarkness: Float = 1.0
+    
+    func setGlobalExtDarkness(_ newValue: Float) {
+        globalExtDarkness = newValue
+        for controller in displayControllers.values {
+            if controller.valid {
+                if controller.extDarkness != globalExtDarkness {
+                    _ = controller.setExtDarkness(globalExtDarkness)
+                }
             }
         }
     }

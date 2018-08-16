@@ -16,6 +16,8 @@ class StatusItemController: NSObject {
     var menu: NSMenu!
     var globalCtlViewController: GlobalCtlViewController!
     var globalCtlItem: NSMenuItem!
+    var extDarknessViewController: ExtDarknessViewController!
+    var extDarknessItem: NSMenuItem!
     var sliderControllers: [SliderViewController] = []
     var quitItem: NSMenuItem!
     
@@ -42,6 +44,12 @@ class StatusItemController: NSObject {
         globalCtlItem = NSMenuItem()
         globalCtlItem.view = globalCtlViewController.view
         
+        extDarknessViewController = ExtDarknessViewController()
+        extDarknessViewController.displaysManager = displaysManager
+        
+        extDarknessItem = NSMenuItem()
+        extDarknessItem.view = extDarknessViewController.view
+        
         quitItem = NSMenuItem()
         quitItem.title = "Quit"
         quitItem.target = self
@@ -65,7 +73,9 @@ class StatusItemController: NSObject {
         sliderControllers = []
         
         menu.addItem(globalCtlItem)
+        menu.addItem(NSMenuItem.separator())
         
+        menu.addItem(extDarknessItem)
         menu.addItem(NSMenuItem.separator())
         
         // Call displaysManager to reload connected displays

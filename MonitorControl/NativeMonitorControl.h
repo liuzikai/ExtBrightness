@@ -14,7 +14,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-float buildInGetBrightness(CGDirectDisplayID dspy);
-bool buildInSetBrightness(CGDirectDisplayID dspy, float new_brightness);
+float nativeGetBrightness(CGDirectDisplayID dspy);
+bool nativeSetBrightness(CGDirectDisplayID dspy, float new_brightness);
 
 #endif /* AppController_h */

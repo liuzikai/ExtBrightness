@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ExtDarknessViewController" customModule="ExtBrightness" customModuleProvider="target">
+            <connections>
+                <outlet property="darknessLabel" destination="ZeQ-aB-c6I" id="VdM-4t-KTC"/>
+                <outlet property="darknessSlider" destination="wi2-CB-dRX" id="Tf9-OF-rxu"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="163" height="47"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField toolTip="scale down all birghtness values by a ratio, which is in dependent from actual brightness." horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZeQ-aB-c6I">
+                    <rect key="frame" x="21" y="28" width="121" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ExtDarkness: 100%" id="4qS-bL-1NO">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <slider toolTip="scale down all birghtness values by a ratio, which is in dependent from actual brightness." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wi2-CB-dRX">
+                    <rect key="frame" x="18" y="1" width="127" height="24"/>
+                    <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="100" tickMarkPosition="below" numberOfTickMarks="2" sliderType="linear" id="VuE-iD-p95"/>
+                    <connections>
+                        <action selector="darknessSliderChange:" target="-2" id="l2e-em-3Va"/>
+                    </connections>
+                </slider>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ZeQ-aB-c6I" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="6CW-Yw-DUC"/>
+                <constraint firstItem="ZeQ-aB-c6I" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="2" id="BHw-H4-Ci5"/>
+                <constraint firstItem="wi2-CB-dRX" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="GHS-H0-XV2"/>
+                <constraint firstItem="wi2-CB-dRX" firstAttribute="top" secondItem="ZeQ-aB-c6I" secondAttribute="bottom" constant="5" id="GaZ-zi-pH0"/>
+                <constraint firstAttribute="bottom" secondItem="wi2-CB-dRX" secondAttribute="bottom" constant="2" id="ehd-AS-PSz"/>
+                <constraint firstItem="wi2-CB-dRX" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="hWG-6f-CtW"/>
+                <constraint firstAttribute="trailing" secondItem="wi2-CB-dRX" secondAttribute="trailing" constant="20" symbolic="YES" id="nq0-KQ-6wb"/>
+            </constraints>
+            <point key="canvasLocation" x="183" y="60.5"/>
+        </customView>
+    </objects>
+</document>

@@ -10,11 +10,11 @@ import Cocoa
 
 enum DisplayType {
     case BuildIn
-    // Build-in displays are accessed with buildinSet/GetBrightness(), which uses Cocoa APIs
-    
+    case ExternalNative      // 'Native' means brightness value can be read and set with Cocoa APIs
+                             // Build-in and external native displays are accessed with buildinSet/GetBrightness(), which uses Cocoa APIs
     case ExternalOnline      // 'Online' means brightness values can be retrieved with DDC
     case ExternalOffline     // 'Offline' means brightness values can only be set but not read with DDC
-    // External displays are accessed with extSet/GetBrightness(), which uses DDC for communication
+                             // External displays are accessed with extSet/GetBrightness(), which uses DDC for communication
 }
 
 /// This class handle displays parameters
@@ -24,6 +24,8 @@ class DisplayController: NSObject {
     // If a display is no longer accessible, its controller is set as invalid but not release,
     // which allows brightness values to be kept for offline external display
     
+    //MARK:- DISPLAY PARAMETERS
+    
     var screenObject: NSScreen!
     var displayID: CGDirectDisplayID!
     var displayType: DisplayType!
@@ -31,16 +33,18 @@ class DisplayController: NSObject {
     var screenSerial: String?
     var screenName: String?
     
-    var brightness: Double = 0.5  // Range: 0.0 - 1.0
     
+    //MARK:- BRIGHTNESS CONTROL
+    
+    var brightness: Float = 0.5 // Range: 0.0 - 1.0
                                    // For internal display, the brightness range is 0.0 to 1.0
     var maxBrightness: UInt8 = 100 // For external display, the brightness range depends on monitor
     //TODO: make maxBrightness configurable
     
     func reloadBrightness() -> Bool {
-        let newValue: Double
-        if (displayType == DisplayType.BuildIn) {
-            newValue = Double(buildInGetBrightness(displayID))
+        let newValue: Float
+        if (displayType == DisplayType.BuildIn || displayType == DisplayType.ExternalNative) {
+            newValue = nativeGetBrightness(displayID)
             if 0.0 <= newValue && newValue <= 1.0 {
                 
             } else {
@@ -54,7 +58,7 @@ class DisplayController: NSObject {
                 print("Fail to get external brightness.")
                 return false;
             }
-            newValue = Double(tmpBrightness) / Double(tmpMaxBrightness)
+            newValue = Float(tmpBrightness) / Float(tmpMaxBrightness)
         } else {
             return false
         }
@@ -66,12 +70,12 @@ class DisplayController: NSObject {
         }
     }
     
-    func setBrightness(_ newValue: Double) -> Bool {
+    func setBrightness(_ newValue: Float) -> Bool {
         let ret: Bool
-        if (displayType == DisplayType.BuildIn) {
-            ret = buildInSetBrightness(displayID, Float(newValue))
+        if displayType == DisplayType.BuildIn || displayType == DisplayType.ExternalNative {
+            ret = nativeSetBrightness(displayID, Float(newValue))
         } else {
-            ret = extSetBrightness(displayID, UInt8(Int(Double(maxBrightness) * newValue)))
+            ret = extSetBrightness(displayID, UInt8(Int(Float(maxBrightness) * newValue)))
         }
         // If fail to set new value, do not update stored brightness value
         if ret {
@@ -80,6 +84,25 @@ class DisplayController: NSObject {
         return ret
     }
     
+    //MARK:- EXTDARKNESS
+    
+    var originalGammaTable: GammaTable!
+    var extDarkness: Float = 1.0
+    
+    func setExtDarkness(_ newValue: Float) -> Bool {
+        if originalGammaTable != nil {
+            let newGammaTable = originalGammaTable.copy(withBrightness: newValue)
+            if newGammaTable != nil {
+                if newGammaTable?.apply(toDisplay: displayID) == CGError.success {
+                    extDarkness = newValue
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    //MARK:- INITIALIZATION
     init(screenObject screen: NSScreen, displayID id: CGDirectDisplayID, displayType type: DisplayType) {
         screenObject = screen
         displayID = id
@@ -89,6 +112,10 @@ class DisplayController: NSObject {
         } else {
             screenName = extGetScreenName(id)
         }
-
+        
+        originalGammaTable = GammaTable(forDisplay: displayID)
+        if originalGammaTable == nil {
+            print("Fail to get original gamma table.")
+        }
     }
 }

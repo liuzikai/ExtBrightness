@@ -10,7 +10,7 @@
 		020D5B5521071B0B000C2208 /* GlobalCtlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D5B5321071B0B000C2208 /* GlobalCtlViewController.swift */; };
 		020D5B5621071B0B000C2208 /* GlobalCtlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020D5B5421071B0B000C2208 /* GlobalCtlViewController.xib */; };
 		020D5B5921071C3E000C2208 /* DisplaysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D5B5821071C3E000C2208 /* DisplaysManager.swift */; };
-		022252AA210709D200F852D0 /* BuildInMonitorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 022252A8210709D100F852D0 /* BuildInMonitorControl.m */; };
+		022252AA210709D200F852D0 /* NativeMonitorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 022252A8210709D100F852D0 /* NativeMonitorControl.m */; };
 		025E0BE72105C63000ECC12E /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E0BE52105C63000ECC12E /* SliderViewController.swift */; };
 		025E0BE82105C63000ECC12E /* SliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025E0BE62105C63000ECC12E /* SliderViewController.xib */; };
 		027BE0AC2105F79A00AD379A /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 027BE0AB2105F79900AD379A /* DDC.c */; };
@@ -19,6 +19,9 @@
 		029C27072104755500DA861F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 029C27062104755500DA861F /* Assets.xcassets */; };
 		029C270A2104755500DA861F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029C27082104755500DA861F /* MainMenu.xib */; };
 		029C272A2105C32F00DA861F /* DisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C27272105C32F00DA861F /* DisplayController.swift */; };
+		02C452FF21255A030029C5AF /* GammaTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C452FE21255A020029C5AF /* GammaTable.m */; };
+		02C4530421255A570029C5AF /* ExtDarknessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C4530221255A570029C5AF /* ExtDarknessViewController.swift */; };
+		02C4530521255A570029C5AF /* ExtDarknessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02C4530321255A570029C5AF /* ExtDarknessViewController.xib */; };
 		02FB96D62105C83A00669B78 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB96D52105C83A00669B78 /* StatusItemController.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,8 +29,8 @@
 		020D5B5321071B0B000C2208 /* GlobalCtlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalCtlViewController.swift; sourceTree = "<group>"; };
 		020D5B5421071B0B000C2208 /* GlobalCtlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GlobalCtlViewController.xib; sourceTree = "<group>"; };
 		020D5B5821071C3E000C2208 /* DisplaysManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysManager.swift; sourceTree = "<group>"; };
-		022252A8210709D100F852D0 /* BuildInMonitorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildInMonitorControl.m; sourceTree = "<group>"; };
-		022252A9210709D100F852D0 /* BuildInMonitorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildInMonitorControl.h; sourceTree = "<group>"; };
+		022252A8210709D100F852D0 /* NativeMonitorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeMonitorControl.m; sourceTree = "<group>"; };
+		022252A9210709D100F852D0 /* NativeMonitorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeMonitorControl.h; sourceTree = "<group>"; };
 		025E0BE52105C63000ECC12E /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		025E0BE62105C63000ECC12E /* SliderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderViewController.xib; sourceTree = "<group>"; };
 		027BE0AB2105F79900AD379A /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
@@ -42,6 +45,10 @@
 		029C2718210485E000DA861F /* ExtBrightness-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExtBrightness-Bridging-Header.h"; sourceTree = "<group>"; };
 		029C2719210485E100DA861F /* DDC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDC.h; sourceTree = "<group>"; };
 		029C27272105C32F00DA861F /* DisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
+		02C452FD21255A020029C5AF /* GammaTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GammaTable.h; sourceTree = "<group>"; };
+		02C452FE21255A020029C5AF /* GammaTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GammaTable.m; sourceTree = "<group>"; };
+		02C4530221255A570029C5AF /* ExtDarknessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtDarknessViewController.swift; sourceTree = "<group>"; };
+		02C4530321255A570029C5AF /* ExtDarknessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtDarknessViewController.xib; sourceTree = "<group>"; };
 		02FB96D52105C83A00669B78 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StatusItemController.swift; path = /Users/liuzikai/Documents/Programming/macOS/ExtBrightness/ExtBrightness/StatusItemController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -66,26 +73,23 @@
 				025E0BE62105C63000ECC12E /* SliderViewController.xib */,
 				020D5B5321071B0B000C2208 /* GlobalCtlViewController.swift */,
 				020D5B5421071B0B000C2208 /* GlobalCtlViewController.xib */,
+				02C4530221255A570029C5AF /* ExtDarknessViewController.swift */,
+				02C4530321255A570029C5AF /* ExtDarknessViewController.xib */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		027BE0A82105F35A00AD379A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		027BE0E42107076100AD379A /* MonitorControl */ = {
 			isa = PBXGroup;
 			children = (
-				022252A9210709D100F852D0 /* BuildInMonitorControl.h */,
-				022252A8210709D100F852D0 /* BuildInMonitorControl.m */,
+				022252A9210709D100F852D0 /* NativeMonitorControl.h */,
+				022252A8210709D100F852D0 /* NativeMonitorControl.m */,
 				027BE0CC2106CA2100AD379A /* ExternalMonitorControl.h */,
 				027BE0CA2106C87E00AD379A /* ExternalMonitorControl.m */,
 				027BE0AB2105F79900AD379A /* DDC.c */,
 				029C2719210485E100DA861F /* DDC.h */,
+				02C452FD21255A020029C5AF /* GammaTable.h */,
+				02C452FE21255A020029C5AF /* GammaTable.m */,
 			);
 			path = MonitorControl;
 			sourceTree = "<group>";
@@ -97,7 +101,6 @@
 				020D5B5721071B35000C2208 /* Views */,
 				027BE0E42107076100AD379A /* MonitorControl */,
 				029C27022104755300DA861F /* Products */,
-				027BE0A82105F35A00AD379A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,6 +187,7 @@
 				025E0BE82105C63000ECC12E /* SliderViewController.xib in Resources */,
 				029C27072104755500DA861F /* Assets.xcassets in Resources */,
 				029C270A2104755500DA861F /* MainMenu.xib in Resources */,
+				02C4530521255A570029C5AF /* ExtDarknessViewController.xib in Resources */,
 				020D5B5621071B0B000C2208 /* GlobalCtlViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,7 +204,9 @@
 				02FB96D62105C83A00669B78 /* StatusItemController.swift in Sources */,
 				020D5B5521071B0B000C2208 /* GlobalCtlViewController.swift in Sources */,
 				029C27052104755300DA861F /* AppDelegate.swift in Sources */,
-				022252AA210709D200F852D0 /* BuildInMonitorControl.m in Sources */,
+				02C4530421255A570029C5AF /* ExtDarknessViewController.swift in Sources */,
+				022252AA210709D200F852D0 /* NativeMonitorControl.m in Sources */,
+				02C452FF21255A030029C5AF /* GammaTable.m in Sources */,
 				020D5B5921071C3E000C2208 /* DisplaysManager.swift in Sources */,
 				027BE0AC2105F79A00AD379A /* DDC.c in Sources */,
 				029C272A2105C32F00DA861F /* DisplayController.swift in Sources */,
