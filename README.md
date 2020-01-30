@@ -1,5 +1,9 @@
 ExtBrightness: macOS GUI utility to control display brightness
 ---
+
+[中文说明](https://www.galacticcontender.com/2020/01/29/ExtBrightness/)
+
+
 This is a utility to control the brightness both build-in and external displays for macOS, and allow ultra-low brightness by modifying graphics card Gamma Table.
 
 It will create a popover on status bar, where you can make various adjustment.
@@ -10,7 +14,7 @@ It will create a popover on status bar, where you can make various adjustment.
 Using '+' or '-' button to increase or decrease all brightness value with a fixed amount (5%). With 'option' pressed, a step is 2%, while with 'shift' it is 10%.
 
 ## ExtDarkness
-This area allow you to scale down all birghtness values by a ratio, which is in **dependent** from actual brightness. This allow you to make **ultra-low brightness**.
+This area allow you to scale down all birghtness values by a ratio, which is **independent** from actual brightness. This allow you to make **ultra-low brightness**.
 
 ## Brightness Control
 This area allow you to control brightness value of individual displays, using the sliders.
